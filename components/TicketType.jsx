@@ -27,7 +27,7 @@ export function TicketType() {
   return (
     <section className="my-8">
       <p>Select Ticket Type:</p>
-      <div className="mt-2 bg-[#052228] flex flex-col gap-6 p-4 rounded-3xl border border-[#07373F]">
+      <div className="mt-2 bg-[#052228] grid md:grid-cols-2 gap-6 p-4 rounded-3xl border border-[#07373F]">
         {ticketTypes.map((ticketType) => (
           <button onClick={() => setSelectedTicketType(ticketType.id)} key={ticketType.id} className={`flex rounded-xl p-2 gap-2 w-full border border-[#07373F] ${selectedTicketType === ticketType.id && "bg-[#197686] border-[#197686]"} `}>
             <div className="flex flex-col items-start justify-between w-full">

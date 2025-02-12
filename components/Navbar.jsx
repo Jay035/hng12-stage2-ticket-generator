@@ -10,7 +10,7 @@ export function Navbar() {
         className="w-[90px] h-auto"
         alt="logo"
       />
-      <ul className="hidden md:flex text-lg gap-4 items-center">
+      <ul className="hidden md:flex text-lg gap-4 items-center text-[#FAFAFA]">
         <li>Events</li>
         <li>My Tickets</li>
         <li>About Project</li>
