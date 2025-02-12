@@ -3,7 +3,7 @@ import { Navbar } from "@/components/Navbar";
 
 export default function Home() {
   return (
-    <div className="p-6 font-[family-name:var(--font-roboto)]">
+    <div className="p-6 font-[family-name:var(--font-roboto)] scroll-smooth">
       <Navbar />
       <Main />
     </div>
