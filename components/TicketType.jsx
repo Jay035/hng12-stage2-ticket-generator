@@ -21,7 +21,7 @@ const ticketTypes = [
   },
 ];
 
-export function TicketType() {
+export function TicketType({ setFormDetails }) {
   const [selectedTicketType, setSelectedTicketType] = useState("regular");
 
   return (
@@ -29,7 +29,21 @@ export function TicketType() {
       <p>Select Ticket Type:</p>
       <div className="mt-2 bg-[#052228] grid md:grid-cols-2 gap-6 p-4 rounded-3xl border border-[#07373F]">
         {ticketTypes.map((ticketType) => (
-          <button onClick={() => setSelectedTicketType(ticketType.id)} key={ticketType.id} className={`flex rounded-xl p-2 gap-2 w-full border border-[#07373F] ${selectedTicketType === ticketType.id && "bg-[#197686] border-[#197686]"} `}>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              setSelectedTicketType(ticketType.id);
+              setFormDetails((prev) => ({
+                ...prev,
+                ticketType: ticketType.id,
+              }));
+            }}
+            key={ticketType.id}
+            className={`flex rounded-xl p-2 gap-2 w-full border border-[#07373F] ${
+              selectedTicketType === ticketType.id &&
+              "bg-[#197686] border-[#197686]"
+            } `}
+          >
             <div className="flex flex-col items-start justify-between w-full">
               <span> {ticketType.name}</span>
               <span className="text-sm">{ticketType.available} left!</span>

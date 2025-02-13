@@ -4,13 +4,20 @@
 
 @font-face {
   font-family: "JejuMyeongjo-Regular";
-  src: url("/public/fonts/JejuMyeongjo-Regular.ttf");
+  src: url("/fonts/JejuMyeongjo-Regular.ttf");
 }
 
 body {
   background-color: #02191d;
 }
 
+.body-radial-gradient {
+  background: radial-gradient(
+    circle,
+    rgba(36, 160, 181, 0.2) 0%,
+    rgba(36, 160, 181, 0) 100%
+  );
+}
 .radial-gradient {
   background: radial-gradient(
     circle,
