@@ -53,7 +53,7 @@ export function StepOne({ nextStep, setFormDetails }) {
         </select>
       </div>
 
-      <div className="mt-8 md:px-3 md:rounded-3xl lg:px-12 font-[JejuMyeongjo-Regular] md:border md:gap-8 md:border-[#0E464F] md:bg-[#041E23] md:flex justify-center items-center">
+      <div className="mt-8 font-[JejuMyeongjo-Regular]  md:gap-8 md:flex justify-center items-center">
         <button
           onClick={(e) => {
             e.preventDefault();

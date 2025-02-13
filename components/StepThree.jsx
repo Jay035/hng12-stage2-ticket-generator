@@ -1,7 +1,8 @@
 import Image from "next/image";
 import bg from "../public/TICKET.svg";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BarcodeSVG } from "./BarCode";
+import { toPng } from "html-to-image";
 
 export function StepThree() {
   const [avatar, setAvatar] = useState("");
@@ -11,6 +12,26 @@ export function StepThree() {
   const [noOfTickets, setNoOfTickets] = useState();
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const ticketRef = useRef(null);
+
+  const resetStorage = () => {
+    localStorage.removeItem("ticketGenerationForm");
+    window.location.reload();
+  };
+
+  const downloadAsImage = () => {
+    if (ticketRef.current) {
+      toPng(ticketRef.current, { quality: 1 })
+        .then((dataUrl) => {
+          const link = document.createElement("a");
+          link.href = dataUrl;
+          link.download = "ticket.png";
+          link.click();
+        })
+        .catch((err) => console.error("Error generating image:", err));
+    }
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -38,7 +59,10 @@ export function StepThree() {
         Your Ticket is Booked!
       </h1>
       <p>You can download or Check your email for a copy</p>
-      <div className="mt-8 w-[300px] mx-auto flex justify-center items-center flex-col relative">
+      <div
+        ref={ticketRef}
+        className="mt-8 w-[300px] mx-auto flex justify-center items-center flex-col relative"
+      >
         <Image
           width="0"
           height="0"
@@ -109,6 +133,26 @@ export function StepThree() {
         <div className="absolute left-4 flex justify-center bottom-5 w-[90%] mx-auto ">
           <BarcodeSVG />
         </div>
+      </div>
+      <div className="mt-8 font-[JejuMyeongjo-Regular] md:gap-8 md:flex justify-center items-center">
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            downloadAsImage();
+          }}
+          className="bg-[#24A0B5] order-2 lg:w-[214px] px-6 py-3 mb-4 md:mb-0 rounded-lg w-full text-white"
+        >
+          Download Ticket
+        </button>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            resetStorage();
+          }}
+          className="bg-transparent lg:w-[214px] px-6 py-3 border border-[#24A0B5] rounded-lg w-full text-[#24A0B5]"
+        >
+          Book Another Ticket
+        </button>
       </div>
     </div>
   );
