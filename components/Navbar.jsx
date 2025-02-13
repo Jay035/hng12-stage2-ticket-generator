@@ -12,8 +12,8 @@ export function Navbar() {
       />
       <ul className="hidden md:flex text-lg gap-4 items-center text-[#FAFAFA]">
         <li>Events</li>
-        <li>My Tickets</li>
-        <li>About Project</li>
+        <li className="text-[#B3B3B3]">My Tickets</li>
+        <li className="text-[#B3B3B3]">About Project</li>
       </ul>
       <button className="bg-white text-sm text-[#0A0C11] rounded-md w-[141px] h-11 flex items-center gap-2 justify-center">
         MY TICKETS{" "}

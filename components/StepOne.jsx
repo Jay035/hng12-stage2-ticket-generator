@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { ProgressBar } from "./ProgressBar";
-import { StepCount } from "./StepCount";
 import { EventInfo } from "./EventInfo";
 import { TicketType } from "./TicketType";
 

@@ -5,6 +5,7 @@ import { ProgressBar } from "./ProgressBar";
 import { StepCount } from "./StepCount";
 import { StepOne } from "./StepOne";
 import { StepTwo } from "./StepTwo";
+import { StepThree } from "./StepThree";
 
 export function Main() {
   const [formDetails, setFormDetails] = useState({
@@ -21,7 +22,7 @@ export function Main() {
     fname: "",
     email: "",
     avatar: "",
-    description: "",
+    // description: "",
   });
 
   const totalSteps = 3;
@@ -38,33 +39,27 @@ export function Main() {
   };
 
   const validateForm = () => {
-    if (!formDetails.fname.trim())
-      setErrors((prev) => ({ ...prev, fname: "Full Name is required" }));
+    let errs = {};
+
+    if (!formDetails.fname.trim()) errs.fname = "Full Name is required";
     if (
       !formDetails.email.trim() ||
       !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formDetails.email)
     ) {
-      setErrors((prev) => ({ ...prev, email: "Provide a valid email" }));
+      errs.email = "Provide a valid email";
     }
     if (!formDetails.avatar.trim()) {
-      setErrors((prev) => ({ ...prev, avatar: "Avatar image is required" }));
+      errs.avatar = "Avatar image is required";
     }
-    if (!formDetails.description.trim()) {
-      setErrors((prev) => ({
-        ...prev,
-        description: "Description is required",
-      }));
-    }
-    console.log(errors)
-    if (
-      !errors.avatar ||
-      !errors.description ||
-      !errors.email ||
-      !errors.fname
-    ) {
-      console.log(true);
-      return true;
-    }
+    // if (!formDetails.description.trim()) {
+    //   errs.description = "Description is required";
+    // }
+
+    setErrors(errs);
+
+    const isValid = Object.keys(errs).length === 0;
+    console.log("Is valid?", isValid);
+    return isValid;
   };
 
   useEffect(() => {
@@ -104,6 +99,7 @@ export function Main() {
           nextStep={nextStep}
         />
       )}
+      {formDetails.step === 3 && <StepThree />}
     </main>
   );
 }

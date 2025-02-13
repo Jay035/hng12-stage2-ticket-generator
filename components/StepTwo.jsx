@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { ImageUploader } from "./ImageUploader";
-import { useEffect, useState } from "react";
 
 export function StepTwo({
   errors,
@@ -29,10 +28,12 @@ export function StepTwo({
           id="name"
           name="name"
           aria-describedby={errors.fname ? "fullNameError" : undefined}
-          onChange={(e) =>
-            setFormDetails((prev) => ({ ...prev, fname: e.target.value }))
-          }
+          onChange={(e) => {
+            setFormDetails((prev) => ({ ...prev, fname: e.target.value }));
+            setErrors((prev) => ({ ...prev, fname: "" }));
+          }}
           className="w-full text-[#fafafa] p-3 outline-none border border-[#07373F] bg-transparent rounded-xl"
+          required
         />
         {errors.fname && (
           <p
@@ -64,9 +65,10 @@ export function StepTwo({
             id="email"
             name="email"
             aria-describedby={errors.email ? "emailError" : undefined}
-            onChange={(e) =>
-              setFormDetails((prev) => ({ ...prev, email: e.target.value }))
-            }
+            onChange={(e) => {
+              setFormDetails((prev) => ({ ...prev, email: e.target.value }));
+              setErrors((prev) => ({ ...prev, email: "" }));
+            }}
             className="w-full text-[#fafafa] outline-none bg-transparent rounded-xl"
             required
           />
@@ -91,12 +93,16 @@ export function StepTwo({
           name="description"
           id="description"
           placeholder="Textarea"
-          aria-describedby={errors.email ? "descriptionError" : undefined}
-          onChange={(e) =>
-            setFormDetails((prev) => ({ ...prev, description: e.target.value }))
-          }
+          // aria-describedby={errors.email ? "descriptionError" : undefined}
+          onChange={(e) => {
+            setFormDetails((prev) => ({
+              ...prev,
+              description: e.target.value,
+            }));
+            setErrors((prev) => ({ ...prev, description: "" }));
+          }}
         ></textarea>
-        {errors.description && (
+        {/* {errors.description && (
           <p
             id="descriptionError"
             aria-live="assertive"
@@ -104,7 +110,7 @@ export function StepTwo({
           >
             {errors.description}
           </p>
-        )}
+        )} */}
       </div>
 
       <div className="mt-8 font-[JejuMyeongjo-Regular] md:gap-8 md:flex justify-center items-center">

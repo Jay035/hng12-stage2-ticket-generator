@@ -27,7 +27,7 @@ export function TicketType({ setFormDetails }) {
   return (
     <section className="my-8">
       <p>Select Ticket Type:</p>
-      <div className="mt-2 bg-[#052228] grid md:grid-cols-2 gap-6 p-4 rounded-3xl border border-[#07373F]">
+      <div className="mt-2 bg-[#052228] grid md:grid-cols-3 gap-6 p-4 rounded-3xl border border-[#07373F]">
         {ticketTypes.map((ticketType) => (
           <button
             onClick={(e) => {
@@ -39,18 +39,19 @@ export function TicketType({ setFormDetails }) {
               }));
             }}
             key={ticketType.id}
-            className={`flex rounded-xl p-2 gap-2 w-full border border-[#07373F] ${
+            className={`rounded-xl p-2 text-left w-full border border-[#07373F] hover:border-[#197686] hover:bg-[#2C545B] ${
               selectedTicketType === ticketType.id &&
               "bg-[#197686] border-[#197686]"
             } `}
           >
-            <div className="flex flex-col items-start justify-between w-full">
-              <span> {ticketType.name}</span>
-              <span className="text-sm">{ticketType.available} left!</span>
-            </div>
-            <span className="border h-[38px] text-xl rounded-lg flex items-center justify-end w-20 px-2 font-semibold border-[#2BA4B9] bg-[#0E464F]">
+            <span className="text-2xl font-semibold">
               {ticketType.price}
             </span>
+            <div className="mt-3 flex flex-col items-start justify-between w-full">
+              <span> {ticketType.name}</span>
+              <span className="text-sm">20/52</span>
+            </div>
+           
           </button>
         ))}
       </div>
