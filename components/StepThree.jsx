@@ -98,7 +98,7 @@ export function StepThree() {
               <span className="text-xs">
                 {description
                   ? `${description.slice(0, 128)}${
-                      description.length > 128 && "..."
+                      description.length > 128 ? "..." : ""
                     }`
                   : "Nil"}
               </span>
@@ -107,7 +107,7 @@ export function StepThree() {
         </div>
 
         <div className="absolute left-4 flex justify-center bottom-5 w-[90%] mx-auto ">
-          <BarcodeSVG value="987654321" />
+          <BarcodeSVG />
         </div>
       </div>
     </div>

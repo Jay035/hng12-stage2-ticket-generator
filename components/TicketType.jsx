@@ -44,14 +44,11 @@ export function TicketType({ setFormDetails }) {
               "bg-[#197686] border-[#197686]"
             } `}
           >
-            <span className="text-2xl font-semibold">
-              {ticketType.price}
-            </span>
+            <span className="text-2xl font-semibold">{ticketType.price}</span>
             <div className="mt-3 flex flex-col items-start justify-between w-full">
               <span> {ticketType.name}</span>
               <span className="text-sm">20/52</span>
             </div>
-           
           </button>
         ))}
       </div>

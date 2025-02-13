@@ -1,30 +1,43 @@
-import { useEffect, useRef, useState } from "react";
-import JsBarcode from "jsbarcode";
-
 export const BarcodeSVG = () => {
-  const canvasRef = useRef(null);
-  const [barcodeValue, setBarcodeValue] = useState("");
-
-  useEffect(() => {
-    const randomBarcode = Math.floor(
-      1000000000 + Math.random() * 9000000000
-    ).toString();
-    setBarcodeValue(randomBarcode);
-
-    if (canvasRef.current) {
-      JsBarcode(canvasRef.current, randomBarcode, {
-        format: "CODE128",
-        displayValue: true,
-        background: "transparent",
-        lineColor: "#fff",
-        height: 40,
-      });
-    }
-  }, []);
-
   return (
     <div className="font-[family-name:var(--font-inter)]">
-      <canvas ref={canvasRef}></canvas>
+      <div className="flex gap-3">
+        <section className="flex gap-[2.2px]">
+          <div className="h-[60px] w-[2px] bg-white"></div>
+          <div className="h-[60px] w-[2px] bg-white"></div>
+          <div className="h-[51px] w-[9px] mr-[2px] bg-white"></div>
+          <div className="h-[51px] w-[3px] mr-[2px] bg-white"></div>
+          <div className="h-[56px] w-[2px] mr-[2px] bg-white"></div>
+          <div className="h-[56px] w-[2px] mr-[2px] bg-white"></div>
+          <div className="h-[51px] w-[3px] bg-white"></div>
+          <div className="h-[51px] w-[4px] bg-white"></div>
+        </section>
+        <section className="flex gap-[2.2px]">
+          <div className="h-[51px] w-[2px] bg-white"></div>
+          <div className="h-[51px] ml-[2px] w-[7px] bg-white"></div>
+          <div className="h-[51px] w-[4px] mr-[2px] bg-white"></div>
+          <div className="h-[51px] w-[3px] mr-[2px] bg-white"></div>
+          <div className="h-[56px] w-[2px] mr-[2px] bg-white"></div>
+          <div className="h-[56px] w-[2px] mr-[2px] bg-white"></div>
+          <div className="h-[51px] w-[3px] bg-white"></div>
+          <div className="h-[51px] w-[4px] bg-white"></div>
+        </section>
+        <section className="flex gap-[2.2px]">
+          <div className="h-[51px] w-[2px] bg-white"></div>
+          <div className="h-[51px] ml-[2px] w-[7px] bg-white"></div>
+          <div className="h-[51px] w-[4px] mr-[2px] bg-white"></div>
+          <div className="h-[51px] w-[3px] mr-[2px] bg-white"></div>
+          <div className="h-[56px] w-[2px] mr-[2px] bg-white"></div>
+          <div className="h-[56px] w-[2px] mr-[2px] bg-white"></div>
+          <div className="h-[51px] w-[3px] bg-white"></div>
+          <div className="h-[51px] w-[4px] bg-white"></div>
+        </section>
+      </div>
+      <div className="flex text-xs justify-between items-center">
+        <span>2</span>
+        <p className="tracking-wide">3456677</p>
+        <p className="tracking-wide">8474774</p>
+      </div>
     </div>
   );
 };
