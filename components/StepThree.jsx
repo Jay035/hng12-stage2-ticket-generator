@@ -12,6 +12,7 @@ export function StepThree() {
   const [noOfTickets, setNoOfTickets] = useState();
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
+  const [downloading, setDownloading] = useState(false);
 
   const ticketRef = useRef(null);
 
@@ -21,15 +22,17 @@ export function StepThree() {
   };
 
   const downloadAsImage = () => {
+    setDownloading(true);
     if (ticketRef.current) {
-      toPng(ticketRef.current, { quality: 1 })
+      toPng(document.getElementById("ticket"))
         .then((dataUrl) => {
-          const link = document.createElement("a");
-          link.href = dataUrl;
-          link.download = "ticket.png";
-          link.click();
+          download(dataUrl, "ticket.png");
+          setDownloading(false);
         })
-        .catch((err) => console.error("Error generating image:", err));
+        .catch((err) => {
+          console.error("Error generating image:", err);
+          setDownloading(false);
+        });
     }
   };
 
@@ -60,7 +63,7 @@ export function StepThree() {
       </h1>
       <p>You can download or Check your email for a copy</p>
       <div
-        ref={ticketRef}
+        id="ticket"
         className="mt-8 w-[300px] mx-auto flex justify-center items-center flex-col relative"
       >
         <Image
@@ -80,10 +83,8 @@ export function StepThree() {
             <p className="">📅 March 15, 2025 | 7:00 PM</p>
           </div>
           {avatar && (
-            <Image
-              className="rounded-xl h-[140px] mx-auto border-4 border-[#24A0B5]/50"
-              width={140}
-              height="0"
+            <img
+              className="rounded-xl w-[140px] h-[140px] mx-auto border-4 border-[#24A0B5]/50"
               src={avatar}
               alt="profile photo"
             />
@@ -140,9 +141,12 @@ export function StepThree() {
             e.preventDefault();
             downloadAsImage();
           }}
-          className="bg-[#24A0B5] order-2 lg:w-[214px] px-6 py-3 mb-4 md:mb-0 rounded-lg w-full text-white"
+          className={`bg-[#24A0B5] order-2 lg:w-[214px] px-6 py-3 mb-4 md:mb-0 rounded-lg w-full text-white ${
+            downloading && "animate-pulse"
+          }`}
         >
-          Download Ticket
+          {downloading ? "Downloading..." : "Download Ticket"}
+
         </button>
         <button
           onClick={(e) => {
