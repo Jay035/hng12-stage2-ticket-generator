@@ -38,18 +38,33 @@ export function Main() {
   };
 
   const validateForm = () => {
-    let errs = {};
-    if (!formDetails.fname.trim()) errs.fname = "Full Name is required";
+    if (!formDetails.fname.trim())
+      setErrors((prev) => ({ ...prev, fname: "Full Name is required" }));
     if (
       !formDetails.email.trim() ||
       !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formDetails.email)
     ) {
-      errs.email = "Provide a valid email";
+      setErrors((prev) => ({ ...prev, email: "Provide a valid email" }));
     }
     if (!formDetails.avatar.trim()) {
-      alert("Avatar image URL is required");
+      setErrors((prev) => ({ ...prev, avatar: "Avatar image is required" }));
     }
-    setErrors(errs);
+    if (!formDetails.description.trim()) {
+      setErrors((prev) => ({
+        ...prev,
+        description: "Description is required",
+      }));
+    }
+    console.log(errors)
+    if (
+      !errors.avatar ||
+      !errors.description ||
+      !errors.email ||
+      !errors.fname
+    ) {
+      console.log(true);
+      return true;
+    }
   };
 
   useEffect(() => {
@@ -83,6 +98,7 @@ export function Main() {
           formDetails={formDetails}
           validateForm={validateForm}
           errors={errors}
+          setErrors={setErrors}
           setFormDetails={setFormDetails}
           prevStep={prevStep}
           nextStep={nextStep}

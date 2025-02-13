@@ -9,14 +9,15 @@ export function StepTwo({
   nextStep,
   formDetails,
   setFormDetails,
+  setErrors,
 }) {
-  const handleSubmit = () => {
-    validateForm();
-  };
-
   return (
-    <form onSubmit={handleSubmit} className=" mt-8 ">
-      <ImageUploader setFormDetails={setFormDetails} />
+    <form className=" mt-8 ">
+      <ImageUploader
+        errors={errors}
+        setErrors={setErrors}
+        setFormDetails={setFormDetails}
+      />
       <hr className="bg-[#07373F] border border-[#07373F] w-full p-[3px]" />
       <div className="my-8 flex flex-col gap-2">
         <label className="" htmlFor="name">
@@ -110,7 +111,9 @@ export function StepTwo({
         <button
           onClick={(e) => {
             e.preventDefault();
-            nextStep();
+            if (validateForm()) {
+              nextStep();
+            }
           }}
           className="bg-[#24A0B5] order-2 lg:w-[214px] px-6 py-3 mb-4 md:mb-0 rounded-lg w-full text-white"
         >

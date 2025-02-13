@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 const CLOUDINARY_UPLOAD_PRESET = "ticketing-generator";
 const CLOUDINARY_CLOUD_NAME = "dx5zusyom";
 
-export function ImageUploader({ setFormDetails }) {
+export function ImageUploader({ errors, setFormDetails, setErrors }) {
   const [imageUrl, setImageUrl] = useState(
     localStorage.getItem("avatar") || ""
   );
@@ -35,7 +35,8 @@ export function ImageUploader({ setFormDetails }) {
       console.log(data);
       setFormDetails((prev) => ({ ...prev, avatar: data.secure_url }));
     } catch (error) {
-      alert("Upload failed:", error);
+      console.error("Upload failed:", error);
+      setErrors((prev) => ({ ...prev, avatar: `Upload failed: ${error}` }));
     } finally {
       setLoading(false);
     }
@@ -92,6 +93,7 @@ export function ImageUploader({ setFormDetails }) {
             ref={fileInputRef}
             onChange={handleChange}
             className="hidden"
+            aria-describedby={errors.avatar ? "avatarError" : undefined}
           />
 
           {imageUrl ? (
@@ -107,7 +109,9 @@ export function ImageUploader({ setFormDetails }) {
           ) : (
             <div className="gap-4 flex items-center flex-col">
               <Image
-                className={`w-[27px] transition-all duration-200 ${loading && "rotate-180" }`}
+                className={`w-[27px] transition-all duration-200 ${
+                  loading && "rotate-180"
+                }`}
                 width="0"
                 height="0"
                 src="/upload.svg"
@@ -124,6 +128,15 @@ export function ImageUploader({ setFormDetails }) {
           )}
         </div>
       </div>
+      {errors.avatar && (
+        <p
+          id="avatarError"
+          aria-live="assertive"
+          className="text-red-500 text-sm pt-1"
+        >
+          {errors.avatar}
+        </p>
+      )}
     </div>
   );
 }
